@@ -1,0 +1,776 @@
+* {
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.font-principal {
+    font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+header {
+    background-color: #f8b7b7;
+    padding: 10px;
+}
+
+/*Menu*/
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu-link {
+    color: #db8993 !important;
+    text-decoration: none;
+    position: relative;
+    padding: 10px;
+    margin-right: 20px;
+    text-transform: uppercase;
+}
+
+.menu-link:hover {
+    color: black;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    /* Coloca el menú justo debajo del botón */
+    left: 0;
+    background-color: #f0a3a6;
+    /* Ajusta el color de fondo del menú */
+    display: none;
+    /* Oculta el menú por defecto */
+    z-index: 9999;
+    padding: 20px;
+    /* Espacio interno en el menú */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 250px;
+    /* Ancho mínimo del menú */
+}
+
+.dropdown.show .dropdown-content {
+    display: block;
+    /* Muestra el menú cuando se hace clic en el botón */
+}
+
+.dropdown-content.show {
+    display: flex;
+    /* Mostrar el menú solo cuando la clase 'show' esté presente */
+}
+
+.dropdown-content .menu-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-content .menu-column h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.dropdown-content a {
+    color: #f58f8f;
+    padding: 5px 0;
+}
+
+.menu>li:hover .dropdown-content,
+.dropdown-content.show {
+    display: flex;
+}
+
+.menu>li:hover {
+    background-color: #f2a6a6;
+}
+
+/*Slider */
+.slider-container {
+    width: 100%;
+    max-width: auto;
+    /* Limitar el ancho máximo */
+    margin: 0 auto;
+    /* Centramos el slider */
+    overflow: hidden;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    /* Para mantener el aspecto de la imagen */
+    object-fit: cover;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.dots {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.dots span {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.active {
+    background-color: #333;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+
+    .prev,
+    .next {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .prev,
+    .next {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .dots span {
+        height: 8px;
+        width: 8px;
+    }
+}
+
+/*Slider */
+/*Imagenes Categoria */
+.categorias-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Ajuste automático de columnas */
+    gap: 10px;
+    /* width: 100vw; */
+    width: 100%;
+    /* Ancho completo de la ventana */
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.categoria {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 0px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.categoria:hover {
+    /* transform: scale(1.05); */
+}
+
+.categoria img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.categoria::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.categoria-texto {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 200;
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+}
+
+.categoria:hover img {
+    opacity: 0;
+    /* Ocultar la imagen original */
+}
+
+/* Asignar la nueva imagen en hover */
+<?php if (isset($imgCategorias) && count($imgCategorias) > 0) {
+    $cont =0;
+
+    foreach ($imgCategorias as $img) {
+        $cont++;
+        echo ".categoria:nth-child(" . $cont . ")::before {
+ background-image: url('" . asset(' img/menu/' . $img->imagen . "-hover.jpg") . "');
+    }
+
+    ";
+
+}
+}
+
+?>.categoria:hover::before {
+    opacity: 1;
+    /* Mostrar la nueva imagen en hover */
+}
+
+/* Ajuste responsivo para pantallas más pequeñas */
+@media (max-width: 600px) {
+    .categoria-texto {
+        font-size: 1.2rem;
+        bottom: 10px;
+    }
+}
+
+/* */
+
+.container-text {
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+
+    color: #b3b3b3;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.category-title {
+    font-size: 38px;
+    color: #AAAAAA;
+    /* font-family: "Futura", Sans-serif; */
+    /* font-weight: 500; */
+    line-height: 1.1em;
+    /* O cualquier tamaño que desees */
+}
+
+
+p {
+    color: #AAAAAA;
+    font-family: "Futura Book", Sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.product-categories {
+    text-align: center;
+    /* Centra todo el texto dentro del contenedor */
+    margin: 20px;
+    /* Añade margen alrededor del contenedor si es necesario */
+}
+
+
+nav .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav .menu>li {
+    position: relative;
+}
+
+nav .menu .menu-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav .menu .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 300%;
+    /* Ajusta este valor para que salga más abajo */
+    left: 70%;
+    /* Centra el submenú con respecto al elemento */
+    transform: translateX(-50%);
+    /* Centrado horizontal */
+    background: linear-gradient(135deg, #f8a7b1, #d67885);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 700px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+nav .menu .dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+nav .menu .dropdown-content .menu-column {
+    flex: 1;
+    margin-right: 20px;
+}
+
+nav .menu .dropdown-content h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+
+nav .menu .dropdown-content a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+nav .menu .dropdown-content a:hover {
+    text-decoration: underline;
+}
+
+/*Productos */
+.product-container {
+    display: flex;
+
+    gap: 35px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 30px;
+    background-color: white;
+}
+
+.product {
+    text-align: left;
+    width: 250px;
+    font-family: "Nunito Sans", sans-serif;
+    background-color: #fff;
+    padding: 35px;
+    padding: 8px 16px;
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.product:hover {
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.nuevo,
+.promocion {
+    background-color: #f4a9a8;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    position: relative;
+    top: -10px;
+}
+
+button {
+    background-color: #f4a9a8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.boton-carrito:hover {
+    color: #d67885;
+}
+
+/*Productos */
+
+/*Footer*/
+.footer {
+    background-color: #db8993;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+}
+
+.footer-container {
+
+    position: relative;
+    /* Necesario para que el pseudo-elemento se posicione dentro de .footer-container */
+
+    padding: 40px;
+
+    color: white;
+    height: 250px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background-color: transparent;
+
+    overflow: hidden;
+    /* Para evitar que el pseudo-elemento se salga del contenedor */
+}
+
+
+.footer-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 500px;
+    background-image: url('/img/footer-bf.jpg');
+    /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.92;
+    z-index: -1;
+    mix-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5);
+    filter: brightness(0.7);
+}
+
+.footer-logo {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+.footer-logo img {
+    display: flex;
+    width: 450px;
+    height: auto;
+}
+
+.footer-logo p {
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+    color: white;
+
+}
+
+.footer-section {
+    margin: 0 20px;
+    color: white;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Estilos para el botón de WhatsApp */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    /* Distancia desde el fondo */
+    right: 20px;
+    /* Distancia desde la derecha */
+    background-color: #25D366;
+    /* Color de fondo de WhatsApp */
+    color: white;
+    /* Color del ícono */
+    border-radius: 50%;
+    /* Hacer que el botón sea circular */
+    padding: 0;
+    /* Eliminar padding para ajustar el tamaño del botón */
+    font-size: 30px;
+    /* Tamaño del ícono */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Sombra */
+    text-align: center;
+    /* Centrar el contenido */
+    z-index: 1000;
+    /* Asegurar que esté sobre otros elementos */
+    width: 70px;
+    /* Ancho del botón */
+    height: 70px;
+    /* Alto del botón */
+    display: flex;
+    /* Usar flexbox para centrar el ícono */
+    align-items: center;
+    /* Centrar verticalmente */
+    justify-content: center;
+    /* Centrar horizontalmente */
+}
+
+/* Estilo adicional para el ícono si es necesario */
+.whatsapp-btn i {
+    font-size: 40px;
+    /* Aumentar el tamaño del ícono */
+}
+
+.whatsapp-btn:hover {
+    background-color: #20b858;
+    cursor: pointer;
+}
+
+.copyright {
+    background-color: #f4f4f4;
+    color: #666;
+    padding: 5px 0;
+    font-size: 12px;
+    text-align: center;
+}
+
+/*Footer */
+
+/* Estilo del Modal */
+
+/* Estilo del Modal */
+.whatsapp-modal {
+    display: none;
+    /* Oculto por defecto */
+    position: fixed;
+    bottom: 100px;
+    /* Ajusta según la posición del botón */
+    right: 20px;
+    background-color: white;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.modal-content {
+    padding: 15px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #25D366;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-body {
+    padding: 10px;
+    text-align: center;
+}
+
+.chat-btn {
+    background-color: #25D366;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.close {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* conoce tu piel */
+.container {
+    text-align: center;
+    color: #b27b7b;
+}
+
+.container h1 {
+    font-size: 2em;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.container p {
+    font-size: 1.2em;
+    margin: 1em 0;
+    color: #b27b7b;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    border: 1px solid #b27b7b;
+    color: #b27b7b;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+
+/*conoce tu piel */
+.image-container {
+    position: relative;
+    /* width: 100vw; */
+    width: 100%;
+}
+
+.image-container img {
+    width: 100%;
+    height: 73%;
+    object-fit: cover;
+    /* Para que la imagen cubra todo el contenedor sin deformarse */
+}
+
+.text-overlay {
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #b27b7b;
+    font-family: "Futura Book", Sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.text-overlay h1 {
+    font-size: 35px;
+
+    margin: 1em 0;
+    color: #b27b7b;
+}
+
+.text-overlay p {
+    font-size: 1.2em;
+    margin: 1em 0;
+    color: #b27b7b;
+}
+
+
+.image-container-piel {
+    position: relative;
+    /* width: 100vw; */
+    width: 100%;
+}
+
+.image-container-piel img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    /* Para que la imagen cubra todo el contenedor sin deformarse */
+}
+
+.text-overlay-piel {
+    position: absolute;
+    top: 45%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #b8b8b8;
+    font-family: "Futura Book", Sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.text-overlay-piel h1 {
+    font-size: 35px;
+
+    margin: 1em 0;
+    color: #c8c8c8;
+}
+
+.text-overlay-piel p {
+    font-size: 1.3em;
+
+    color: #c8c8c8;
+}
+
+/*conoce tu piel*/
