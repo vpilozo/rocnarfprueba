@@ -15,7 +15,7 @@
             }
             echo '<div class="product">
                     <a href="producto/detalle/' . $producto->id . '">
-                        <div style="text-align:center;"><img src="' . asset('img/productos/' . $producto->imagen) . '" alt="' . $producto->tipo . '" title="' . $producto->tipo . '"></div>
+                        <div style="text-align:center;"><img src="' . asset('img/productos/' . $producto->imagen.'.jpg') . '" alt="' . $producto->tipo . '" title="' . $producto->tipo . '"></div>
                         <h2 style="color:#c9727d;">' . $producto->nombre . '</h2>
                         <p style="color:#c9727d; font-size: 14px;">' . $producto->tipo . '</p>
                         <p style="font-size:13px;">' . $producto->descripcion . '</p>

@@ -247,22 +247,7 @@ header {
     /* Ocultar la imagen original */
 }
 
-/* Asignar la nueva imagen en hover */
-<?php if (isset($imgCategorias) && count($imgCategorias) > 0) {
-    $cont =0;
-
-    foreach ($imgCategorias as $img) {
-        $cont++;
-        echo ".categoria:nth-child(" . $cont . ")::before {
- background-image: url('" . asset(' img/menu/' . $img->imagen . "-hover.jpg") . "');
-    }
-
-    ";
-
-}
-}
-
-?>.categoria:hover::before {
+.categoria:hover::before {
     opacity: 1;
     /* Mostrar la nueva imagen en hover */
 }

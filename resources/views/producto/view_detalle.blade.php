@@ -171,7 +171,7 @@
 <div class="max-w-[1000px] my- mx-auto">
     <div class="grid grid-cols-3 gap-9 font-principal">
         <div class="product-image">
-            <img src="{{asset('img/productos/'.$producto->imagen)}}" alt="Lifting Serum">
+            <img src="{{asset('img/productos/'.$producto->imagen.'.jpg')}}" alt="Lifting Serum">
         </div>
         <div class="product-details font-principal">
             <h2>{{$producto->nombre}}</h2>
@@ -187,7 +187,6 @@
                 $precio = number_format($producto->precio, 2);
             } else {
                 $precio = '<del>' . number_format($producto->precio, 2) . '</del> $' . number_format($producto->oferta, 2); //<p><del>$20.70</del> $15.00</p>
-
             }
             ?>
             <div class="text-[30px] font-thin font-principal ">$<?= $precio; ?></div>
@@ -293,7 +292,7 @@
             }
             echo '<div class="product">
                     <a href="producto/detalle/' . $producto->id . '">
-                        <div style="text-align:center;"><img src="' . asset('img/productos/' . $producto->imagen) . '" alt="' . $producto->tipo . '" title="' . $producto->tipo . '"></div>
+                        <div style="text-align:center;"><img src="' . asset('img/productos/' . $producto->imagen . '.jpg') . '" alt="' . $producto->tipo . '" title="' . $producto->tipo . '"></div>
                         <h2 style="color:#c9727d;">' . $producto->nombre . '</h2>
                         <p style="color:#c9727d; font-size: 14px;">' . $producto->tipo . '</p>
                         <p style="font-size:13px;">' . $producto->descripcion . '</p>

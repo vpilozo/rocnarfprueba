@@ -28,11 +28,17 @@
                     <ul class="menu">
                         <?php
                         $menuHtml = '';
+                        $index = '';
+                        $onclick = 'inicio();';
+                        $claseIndex = 'class="menu-link"';
                         $menus = App\Models\Menu::getMenu();
                         if (isset($menus) && count($menus) > 0) {
                             foreach ($menus as $menu) {
                                 $submenuHtml = '';
                                 if (count($menu->subMenus) > 0) {
+                                    $index = 'javascript:;';
+                                    $claseIndex = ' class="menu-link dropbtn"';
+                                    $onclick = '';
                                     $submenuHtml .= '<div class="dropdown-content" id="menuContent">';
                                     foreach ($menu->subMenus as $submenu) {
                                         $subMenu_ = App\Models\Menu::with('allSubMenus')->find($submenu->id);
@@ -47,7 +53,7 @@
                                     $submenuHtml .= '</div>';
                                 }
                                 $menuHtml .= '<li class="dropdown" id="menuToggle">
-                                     <a href="#" class="menu-link dropbtn" onclick="toggleMenu(event)">' . $menu->nombre . '</a>' . $submenuHtml . '
+                                     <a href="' . $index . '" ' . $claseIndex . ' onclick="toggleMenu(event);' . $onclick . '">' . $menu->nombre . '</a>' . $submenuHtml . '
                                 </li>';
                             }
                         }
@@ -78,3 +84,8 @@
         </div>
     </div>
 </div>
+<script>
+    function inicio() {
+        window.open('<?=url('/')?>', '_self');
+    }
+</script>
