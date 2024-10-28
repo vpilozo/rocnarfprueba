@@ -66,7 +66,6 @@
                 <div class="flex items-center ">
                     <!-- Campo de búsqueda -->
                     <input type="text" placeholder="¿Qué producto buscas?" class="w-[350px] h-[37px] text-[12px] flex-1 rounded-l-full py-2 px-4 text-gray-600 outline-none border-[1px] border-[#C9777D]">
-
                     <!-- Botón de búsqueda (Lupa) -->
                     <button class=" transition-all duration-500 h-[37px]  rounded-r-full px-4 py-2  text-[14px] btn-search ">
                         <i class="fas fa-search"></i>
